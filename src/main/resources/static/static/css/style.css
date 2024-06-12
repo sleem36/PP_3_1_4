@@ -1,0 +1,44 @@
+.all-grey {
+    display: flex;
+    justify-content: space-between;
+    background: #4c4a4a;
+    color: #fff;
+}
+.logout-grey a {
+    color: gray;
+}
+.union-grey {
+    display: flex;
+    justify-content: space-between;
+}
+.right-grey {
+    width: 86%;
+}
+.left-grey {
+    width: 12%;
+}
+.center_f {
+    max-width: 280px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20px;
+}
+label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.admin_zag_h2 {
+    background: #f8f8fb;
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #e5e4e4;
+}
+@media (max-width:768px) {
+    .union-grey {
+        flex-flow: wrap;
+    }
+    .left-grey, right-grey {
+        width: 100%;
+    }
+}

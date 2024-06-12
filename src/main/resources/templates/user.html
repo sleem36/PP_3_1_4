@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <link href="/static/style.css?v=3" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+
+<div class="all-grey p-3">
+    <div class="name-grey">
+        <b sec:authentication="name">Bob</b>
+        with roles: <span sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</span> <span sec:authorize="hasRole('ROLE_USER')">USER</span>
+    </div>
+    <div class="logout-grey">
+        <a href="/logout" class="btn-log">Logout</a>
+    </div>
+</div>
+<div class="union-grey p-3">
+    <div class="left-grey">
+        <div class="name-grey">
+            <a id="blue_admin" sec:authorize="hasRole('ROLE_ADMIN')" class="btn w-100" href="/admin">Admin</a>
+        </div>
+        <div class="logout-grey">
+            <a id="blue_user" class="btn w-100" href="/user">User</a>
+        </div>
+    </div>
+    <div class="right-grey">
+            <h1 class="admin_zag">User information-page</h1>
+        <br>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#description_user">User table</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="description_user">
+                <h2 class="admin_zag_h2">About user</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Role</th>
+                    </tr>
+                    <th:block th:each="user : ${users}">
+                        <tr>
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td>
+                                <span th:each="role, iterStat : ${user.roles}">
+                                    <span
+                                            th:if="${role.name.startsWith('ROLE_')}"
+                                            th:text="${role.name.replaceFirst('ROLE_', '')}
+                                "></span>
+                                </span>
+                            </td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<style>
+    #blue_admin {
+        text-align: left;
+    }
+    #blue_user {
+        text-align: left;
+        background: #0d6efd;
+        color: #fff;
+    }
+</style>
+</body>
+</html>

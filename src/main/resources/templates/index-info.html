@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body class="container">
+<h1 style="text-align: center">
+    <div th:if="${userId}">
+        User add
+    </div>
+    <div th:unless="${userId}">
+        User edit
+    </div>
+</h1>
+
+<div th:if="${userAdd}">
+    <form id="form_edit"  class="center_f my-2 my-lg-0" th:action="@{/admin}" th:object="${userAdd}" method="post">
+        <input type="hidden" id="userId" th:field="*{id}">
+        <div class="form-group">
+            <label for="name">Id:</label>
+            <input disabled class="form-control" type="text" id="id" th:field="*{id}" name="id">
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input class="form-control" type="text" id="name" th:field="*{name}" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input class="form-control" type="number" id="age" th:field="*{age}" name="age">
+        </div>
+        <div class="form-group">
+            <label for="lastName">LastName:</label>
+            <input class="form-control" type="text" id="lastName" th:field="*{lastName}" name="lastName">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" type="email" id="email" th:field="*{email}" name="email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input class="form-control" type="text" id="password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Role:</label>
+            <select required th:field="*{roleIds}" class="form-control" name="roleIds" id="exampleFormControlSelect1" multiple>
+                <option value="1">USER</option>
+                <option value="2">ADMIN</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Edit</button>
+    </form>
+</div>
+
+<div th:if="${userDel}">
+    <form id="form_del"  class="center_f my-2 my-lg-0" th:action="@{/admin}" th:object="${userDel}" method="post">
+        <input type="hidden" id="userId2" th:field="*{id}">
+        <div class="form-group">
+            <label for="id2">Id:</label>
+            <input disabled class="form-control" type="text" id="id2" th:field="*{id}" name="id">
+        </div>
+        <div class="form-group">
+            <label for="name2">Name:</label>
+            <input disabled class="form-control" type="text" id="name2" th:field="*{name}" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="age2">Age:</label>
+            <input disabled class="form-control" type="number" id="age2" th:field="*{age}" name="age">
+        </div>
+        <div class="form-group">
+            <label for="lastName2">LastName:</label>
+            <input disabled class="form-control" type="text" id="lastName2" th:field="*{lastName}" name="lastName">
+        </div>
+        <div class="form-group">
+            <label for="email2">Email:</label>
+            <input disabled class="form-control" type="email" id="email2" th:field="*{email}" name="email">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect12">Role:</label>
+            <select disabled required th:field="*{roleIds}" class="form-control" name="roleIds" id="exampleFormControlSelect12" multiple>
+                <option value="1">USER</option>
+                <option value="2">ADMIN</option>
+            </select>
+        </div>
+        <a th:href="@{'/admin/delete?userId=' + ${userDel.id}}" class="btn btn-danger del_b w-100">Delete</a>
+    </form>
+</div>
+</body>
+</html>
