@@ -123,8 +123,6 @@ $('#usersTable').on('click', '.edit_b', function() {
         $('#lastNameEditModal').val(user.lastName);
         $('#ageEditModal').val(user.age);
         $('#emailEditModal').val(user.email);
-
-        // Заполняем текущие роли пользователя в модальном окне
         $('#rolesEditModal').val(user.roleIds);
 
         // Показываем модальное окно
@@ -139,8 +137,6 @@ $('#usersTable').on('click', '.edit_b', function() {
                 alert('Выберите хотя бы одну роль!');
                 return; // Прерываем выполнение функции
             }
-
-
             const updatedUser = {
                 id: $('#idEditModal').val(),
                 name: $('#firstnameEditModal').val(),
@@ -150,7 +146,6 @@ $('#usersTable').on('click', '.edit_b', function() {
                 roleIds: $('#rolesEditModal').val(),
                 password: $('#password2').val()
             };
-
             try {
                 const response = await fetch(`/users`, {
                     method: 'PUT',
@@ -159,7 +154,6 @@ $('#usersTable').on('click', '.edit_b', function() {
                     },
                     body: JSON.stringify(updatedUser) // Отправка обновленных данных пользователя
                 });
-
                 if (response.ok) {
                     console.log(`Пользователь с ID ${userId} успешно изменен.`);
                     $('#myModal').modal('hide');

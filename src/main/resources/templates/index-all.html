@@ -214,9 +214,7 @@
 <script src="/static/js/js.js"></script>
 <script>
     $(document).ready(function() {
-
         getUserList();
-
         // Загрузка текущего пользователя и заполнение его данных в форму
         $.ajax({
             url: '/api/user',
@@ -264,27 +262,7 @@
                     console.error('Произошла ошибка:', error);
                 });
         });
-
-        // Обработка кнопки "Редактировать пользователя"
-        $('.editUserBtn').click(function() {
-            var userId = $(this).data('userId');
-
-            $.ajax({
-                url: '/api/users/' + userId,
-                method: 'GET',
-                success: function(user) {
-                    // Заполнение формы данными выбранного пользователя для редактирования
-                }
-            });
-        });
-
-
-
-
-
-
     });
-
 </script>
 <style>
     #blue_admin {
